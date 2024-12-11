@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>snow</title>
+  <style>
+    body {
+      background: #ccc;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .snow {
+      background: #000;
+      width: 80%;
+      height: 80%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+  <canvas class="snow"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script>
+    var snow = document.querySelector('.snow');
+
+    snow.confetti = snow.confetti || confetti.create(snow, { resize: true });
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    setInterval(() => {
+      snow.confetti({
+        particleCount: 1,
+        startVelocity: 0,
+        spread: 450,
+        ticks: 600,
+        flat: true,
+        origin: {
+          x: Math.random(),
+          // since particles fall down, skew start toward the top
+          y: 0
+        },
+        colors: ['#ffffff'],
+        shapes: ['circle'],
+        gravity: randomInRange(0.1, 0.2),
+        scalar: randomInRange(0.2, 0.5),
+        drift: randomInRange(-0.4, 0.4)
+      });
+    }, 200)
+  </script>
+</body>
+
+</html>
